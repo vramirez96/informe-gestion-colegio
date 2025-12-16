@@ -1,15 +1,16 @@
-
 import sqlite3
 import pandas as pd
 import os
 
-DB_PATH = 'c:/xampp/htdocs/sicar_estadistica/siscar_estadistica'
+# Configuración de la base de datos
+DB_PATH = 'siscar_estadistica.db'
 
 def get_connection():
     """Establishes a connection to the SQLite database."""
     if not os.path.exists(DB_PATH):
-        raise FileNotFoundError(f"Database file not found at {DB_PATH}")
-    return sqlite3.connect(DB_PATH)
+        raise FileNotFoundError(f"Database file not found at {os.path.abspath(DB_PATH)}")
+    conn = sqlite3.connect(DB_PATH)
+    return conn
 
 def load_data_pagos():
     """Loads payment data joining Pago and Detalle_pago."""
